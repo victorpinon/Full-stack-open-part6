@@ -1,20 +1,17 @@
 const notificationReducer = (state = null, action) => {
-  console.log('state now: ', state)
-  console.log('action', action)
-
   switch (action.type) {
     case 'SET_NOTIFICATION':
-      return action.data.content
+      return action.data
     case 'REMOVE_NOTIFICATION':
       return null
     default: return state
   }
 }
 
-export const setNotification = (content) => {
+export const setNotification = (message, time) => {
   return {
     type: 'SET_NOTIFICATION',
-    data: { content }
+    data: { message, time }
   }
 }
 
