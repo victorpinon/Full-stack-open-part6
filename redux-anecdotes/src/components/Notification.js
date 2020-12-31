@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeNotification } from '../reducers/notificationReducer'
 
@@ -6,9 +6,12 @@ const Notification = () => {
   const notification = useSelector(state => state.notification)
   const dispatch = useDispatch()
 
+  const timeout = useRef(null)
+
   useEffect(() => {
     if (notification) {
-      setTimeout(() => {
+      window.clearTimeout(timeout.current)
+      timeout.current = window.setTimeout(() => {
         dispatch(removeNotification())
       }, notification.time * 1000);
     }
